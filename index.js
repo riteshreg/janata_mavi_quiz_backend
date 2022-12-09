@@ -1,11 +1,33 @@
 const express = require('express')
 const app = express()
-const port = 3000
+require('./db/connection')
+const quizModel = require('./db/quiz_model')
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+
+app.use(express.json())
+
+
+
+app.get('/', async(req, res) => {
+  let data = await quizModel.find({})
+  res.send(data)
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+
+app.get('/random_question', (req, res)=>{
+  quizModel.findRandom({}, {}, {limit: 2}, function(err, results) {
+    if (!err) {
+      res.send(results) 
+    }
+  });
 })
+
+
+app.post('/', async(req, res)=>{
+  let data = new quizModel(req.body)
+  data =  await data.save();
+  res.send(data)
+
+})
+
+app.listen(3000)
