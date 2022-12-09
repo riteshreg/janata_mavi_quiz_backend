@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 require('./db/connection')
+var cors = require('cors')
 const quizModel = require('./db/quiz_model')
 const userModel = require('./db/user_model.js')
 
