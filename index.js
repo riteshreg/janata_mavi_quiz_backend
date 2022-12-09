@@ -6,7 +6,7 @@ const userModel = require('./db/user_model.js')
 
 
 app.use(express.json())
-
+app.use(cors())
 
 
 app.get('/', async(req, res) => {
