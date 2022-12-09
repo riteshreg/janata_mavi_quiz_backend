@@ -34,8 +34,6 @@ app.post('/login',async(req,res)=>{
         res.send("no user found")
       }
   
-  }else{
-    res.send("please enter both id and password")
   }
 
 })
