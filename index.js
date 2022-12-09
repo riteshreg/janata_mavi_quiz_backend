@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 require('./db/connection')
 const quizModel = require('./db/quiz_model')
+const userModel = require('./db/user_model.js')
 
 
 app.use(express.json())
@@ -22,6 +23,21 @@ app.get('/random_question', (req, res)=>{
   });
 })
 
+app.post('/login',async(req,res)=>{
+
+  if(req.body.userName && req.body.password){
+    let user = await userModel.findOne(req.body).select("-password")
+      if(user){
+        res.send(user)
+      }else{
+        res.send("no user found")
+      }
+  
+  }else{
+    res.send("please enter both id and password")
+  }
+
+})
 
 app.post('/', async(req, res)=>{
   let data = new quizModel(req.body)
