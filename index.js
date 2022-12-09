@@ -15,7 +15,7 @@ app.get('/', async(req, res) => {
 
 
 app.get('/random_question', (req, res)=>{
-  quizModel.findRandom({}, {}, {limit: 2}, function(err, results) {
+  quizModel.findRandom({}, {}, {limit: 4}, function(err, results) {
     if (!err) {
       res.send(results) 
     }
