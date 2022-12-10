@@ -4,7 +4,9 @@ var random = require('mongoose-simple-random');
 
 const QuizModel = new mongoose.Schema({
     correctAnswer:String,
-    incorrectAnswers:Array,
+    option1:String,
+    option2:String,
+    option3:String,
     question:String
 })
 
