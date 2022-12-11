@@ -31,9 +31,11 @@ app.post('/login',async(req,res)=>{
       if(user){
         res.send(user)
       }else{
-        res.send("no user found")
+        res.send({err:"no user found"})
       }
   
+  }else{
+    res.send({err:"please enter both userName and password"})
   }
 
 })
