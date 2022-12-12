@@ -25,10 +25,11 @@ app.get('/random_question', (req, res) => {
 })
 
 
-app.delete('/delete', (req, res) => {
-  quizModel.deleteOne({ _id: req.body._id }).then((response) => {
+app.delete('/delete/:id', (req, res) => {
+  quizModel.deleteOne({ _id: req.params.id }).then((response) => {
     res.send(response)
   })
+  
 
 })
 
