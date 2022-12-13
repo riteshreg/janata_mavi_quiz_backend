@@ -4,17 +4,32 @@ require('./db/connection')
 var cors = require('cors')
 const quizModel = require('./db/quiz_model')
 const userModel = require('./db/user_model.js')
+const { ObjectID } = require("bson");
 
 
 app.use(express.json())
 app.use(cors())
-
 
 app.get('/', async (req, res) => {
   let data = await quizModel.find({})
   res.send(data)
 })
 
+app.get('/get_data_for_update/:id', (req, res) => {
+  quizModel.findOne({ _id: req.params.id }).then((response) => {
+    if (response) {
+      res.send(response)
+    }
+  })
+})
+
+app.put("/update/:id", async (req, res) => {
+  let data = await quizModel.updateOne(
+    { _id: ObjectID(req.params.id) },
+    { $set: req.body }
+  )
+  res.send(data)
+})
 
 app.get('/random_question', (req, res) => {
   quizModel.findRandom({}, {}, { limit: 10 }, function(err, results) {
@@ -29,7 +44,7 @@ app.delete('/delete/:id', (req, res) => {
   quizModel.deleteOne({ _id: req.params.id }).then((response) => {
     res.send(response)
   })
-  
+
 
 })
 
