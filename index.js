@@ -11,7 +11,7 @@ app.use(express.json())
 app.use(cors())
 
 app.get('/', async (req, res) => {
-  let data = await quizModel.find({})
+  let data = await quizModel.find({}).sort({_id:-1})
   res.send(data)
 })
 
@@ -22,6 +22,7 @@ app.get('/get_data_for_update/:id', (req, res) => {
     }
   })
 })
+
 
 app.put("/update/:id", async (req, res) => {
   let data = await quizModel.updateOne(
