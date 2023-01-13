@@ -9,7 +9,7 @@ const { ObjectID } = require("bson");
 app.use(express.json());
 app.use(cors());
 
-app.get("/:skip", (req, res) => {
+app.get("/admin_question/:skip", (req, res) => {
   quizModel.count({}, async function (error, numOfItems) {
     let data = await quizModel
       .find({})
